@@ -1,0 +1,113 @@
+<mvc:View
+	controllerName="zjblesson.LK6.controller.Worklist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}" />
+		</semantic:titleHeading>
+		
+		<semantic:headerContent>
+			<smartFilterBar:SmartFilterBar id="smartFilterBar"
+				entitySet="zjblessons_base_Materials"
+				useVariantManagement="true"
+				persistencyKey="pk_MaterialsSF"
+				liveMode="false"
+				enableBasicSearch="false"
+				useToolBar="true"/>
+		</semantic:headerContent>
+
+		<semantic:content>
+			<smartTable:SmartTable id="smartTable"
+				entitySet="zjblessons_base_Materials"
+				tableType="ResponsiveTable"
+				smartFilterId="smartFilterBar"
+				editTable="false"
+				useExportToExcel="true"
+				editTogglable="false"
+				useVariantManagement="true"
+				persistencyKey="pk_MaterialsST"
+				useTablePersonalisation="true"
+				header="{i18n>headerForTable}"
+				showRowCount="true"
+				enableAutoBinding="true"
+				showFullScreenButton="true"
+				beforeRebindTable="onBeforeRebindTable">
+				
+			<smartTable:customToolbar>
+				<OverflowToolbar design="Transparent">	
+					<ToolbarSpacer />
+					<Button
+						text="{i18n>create}"
+						press="onButtonCreate">
+					</Button>
+					<Button
+						text="{i18n>delete}"
+						press="onButtonDelete">
+					</Button>
+					<Button
+						text="{i18n>update}"
+						press="onButtonUpdate">
+					</Button>
+					<Button text="Refresh" icon="sap-icon://refresh" press="onPressRefresh"/>
+					<SearchField
+						id="searchField"
+						tooltip="{i18n>worklistSearchTooltip}"
+						search="onSearch"
+						placeholder="{i18n>placehoderForMySearch}"
+						width="20%">
+					</SearchField>
+				</OverflowToolbar>	
+			</smartTable:customToolbar>							
+				
+			<Table
+				id="table"
+				width="auto"
+				mode="SingleSelectLeft"
+				
+				noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished="onUpdateFinished"
+				fieldGroupIds="CreatedBy">
+
+				<columns>
+					
+				</columns>
+
+				<items>
+					<ColumnListItem
+						type="Navigation"
+						press="onPress">
+						
+					</ColumnListItem>
+				</items>
+			</Table>
+			</smartTable:SmartTable>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id ="shareTile" title="{worklistView>/saveAsTileTitle}" />
+		</semantic:saveAsTileAction>
+
+	</semantic:SemanticPage>
+
+</mvc:View>
