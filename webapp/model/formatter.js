@@ -26,6 +26,18 @@ sap.ui.define([], function() {
 
 		radioButton: function(Value) {
 			return (Value !== null) ? parseInt(Value, 10) - 1 : -1;
+		},
+		
+		formatAboutCreatedBy: function(myUser, myDate){
+			var formatOfDate=sap.ui.core.format.DateFormat.getDateInstance({pattern: "dd/MM/yyyy"});
+			var sDate=formatOfDate.format(myDate);
+			return `${this.getModel("i18n").getResourceBundle().getText("labelCreatedByObject")} ${myUser}, ${this.getModel("i18n").getResourceBundle().getText("labelCreatedOn")} ${sDate}`;
+		},
+		
+		formatModifiedBy: function(myUser, myDate){
+			var formatOfDate=sap.ui.core.format.DateFormat.getDateInstance({pattern: "dd/MM/yyyy"});
+			var sDate=formatOfDate.format(myDate);
+			return `${this.getModel("i18n").getResourceBundle().getText("labelModifiedByObject")} ${myUser}, ${this.getModel("i18n").getResourceBundle().getText("labelCreatedOn")} ${sDate}`;
 		}
 
 	};

@@ -58,7 +58,7 @@
 						text="{i18n>update}"
 						press="onButtonUpdate">
 					</Button>
-					<Button text="Refresh" icon="sap-icon://refresh" press="onPressRefresh"/>
+					<Button text="{i18n>refresh}" icon="sap-icon://refresh" press="onPressRefresh"/>
 					<SearchField
 						id="searchField"
 						tooltip="{i18n>worklistSearchTooltip}"
